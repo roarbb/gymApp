@@ -1,15 +1,16 @@
 import React, {PropTypes} from 'react'
 import FacebookLogin from 'react-facebook-login'
+import Logout from '../containers/Logout'
 
-const Login = ({onSaveUser, user}) => {
+const Login = ({onFacebookLoginResponse, user}) => {
   let content = <FacebookLogin
     appId="223180534746400"
-    autoLoad={true}
+    autoLoad={false}
     fields="name,email,picture"
-    callback={onSaveUser} />
+    callback={onFacebookLoginResponse} />
 
   if(user.name) {
-    content = <h2>Logged in as {user.name}</h2>
+    content = <h2>Logged in as {user.name} <Logout /></h2>
   }
 
   return (
@@ -22,7 +23,7 @@ const Login = ({onSaveUser, user}) => {
 };
 
 Login.propTypes = {
-  onSaveUser: PropTypes.func.isRequired,
+  onFacebookLoginResponse: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
 };
 

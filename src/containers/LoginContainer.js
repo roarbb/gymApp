@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {saveUser} from '../actions'
+import {saveLoggedUser} from '../actions'
 import Login from '../components/Login'
 
 const mapStateToProps = (state) => {
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownprops) => {
   return {
-    onSaveUser: (response) => {
-      dispatch(saveUser(response))
+    onFacebookLoginResponse: (response) => {
+      dispatch(saveLoggedUser(response))
     }
   };
 };
