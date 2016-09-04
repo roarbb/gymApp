@@ -1,26 +1,37 @@
-const user = (state = {}, action) => {
+const user = (state = getDefaultState(), action) => {
   switch (action.type) {
     case 'SAVE_FACEBOOK_USER':
       if(!action.response.name) {
-        return state;
+        return setUser(state)
       }
 
-      return action.response
+      return setUser(action.response)
 
     case 'SAVE_API_USER':
       if(!action.response.hash) {
-        return state;
+        return setUser(state)
       }
 
-      return Object.assign({}, state, {
+      const userWithHash = Object.assign({}, state, {
         hash: action.response.hash
-      });
+      })
+
+      return setUser(userWithHash)
 
     case 'LOGOUT_USER':
-      return {};
+      return setUser({})
 
-    default: return state;
+    default: return state
   }
-};
+}
 
-export default user;
+export default user
+
+const setUser = (data) => {
+  localStorage.setItem('user', JSON.stringify(data))
+  return data
+}
+
+const getDefaultState = () => {
+  return JSON.parse(localStorage.getItem('user')) || {}
+}

@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import config from './config'
 
 const setFacebookUser = (response) => {
   return {
@@ -16,9 +17,9 @@ const setApiUser = (response) => {
 
 export const saveLoggedUser = (response) => {
   return dispatch => {
-    dispatch(setFacebookUser(response));
+    dispatch(setFacebookUser(response))
 
-    return fetch(`http://localhost:8081/user/${response.email}`)
+    return fetch(`${config.apiUrl}user/${response.email}`)
       .then(response => response.json())
       .then(json => dispatch(setApiUser(json)))
       .catch(response => console.log(response))
@@ -28,5 +29,29 @@ export const saveLoggedUser = (response) => {
 export const logoutUser = () => {
   return {
     type: 'LOGOUT_USER'
+  }
+}
+
+export const fetchMax = (userHash) => {
+  return dispatch => {
+    dispatch(startFetching())
+
+    fetch(`${config.apiUrl}max/${userHash}`)
+      .then(response => response.json())
+      .then(json => dispatch(setMax(json)))
+      .catch(err => console.log(err))
+  }
+}
+
+export const setMax = (response) => {
+  return {
+    type: 'SAVE_MAX',
+    response: response
+  }
+}
+
+const startFetching = () => {
+  return {
+    type: 'START_MAX_FETCHING'
   }
 }

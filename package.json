@@ -5,9 +5,9 @@
   "repository": "https://stash.switchmedia.asia/projects/ES",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -d --progress --watch",
+    "start": "webpack -d --progress --watch",
     "build": "webpack -p --config webpack.config.js",
-    "start": "webpack-dev-server --inline --content-base ./dist --history-api-fallback"
+    "dev": "webpack-dev-server --inline --content-base ./dist --history-api-fallback"
   },
   "author": "",
   "license": "ISC",
