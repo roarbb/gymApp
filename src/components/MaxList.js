@@ -1,12 +1,18 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
 
 const MaxList = ({max}) => {
   return (
-    <ul>
-      {max.map(function(item) {
-        return <li key={item.id}>{item.discipline} - {item.max}</li>
-      })}
-    </ul>
+      <div className="list-group list-group-flush">
+        {max.map(item => {
+          return (
+            <Link to={`/max/${item.id}`} className="list-group-item list-group-item-action" key={item.id}>
+              <span className="tag tag-primary tag-pill pull-xs-right">{item.max}</span>
+              {item.discipline}
+            </Link>
+          )
+        })}
+      </div>
   )
 };
 

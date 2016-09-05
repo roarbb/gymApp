@@ -4,9 +4,10 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 import configureStore from '../configureStore'
 
 import App from '../components/App'
+import NoMatch from '../components/NoMatch'
 import Dashboard from '../containers/Dashboard'
 import LoginContainer from '../containers/LoginContainer'
-import NoMatch from '../components/NoMatch'
+import DetailContainer from '../containers/DetailContainer'
 
 const store = configureStore();
 
@@ -24,10 +25,11 @@ export default class Root extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path="/" component={App}>
-            <IndexRoute component={Dashboard} onEnter={checkAuth}/>
-            <Route path="login" component={LoginContainer}/>
+            <IndexRoute component={Dashboard} onEnter={checkAuth} />
+            <Route path="max/:maxId" component={DetailContainer} onEnter={checkAuth}/>
+            <Route path="login" component={LoginContainer} />
           </Route>
-          <Route path="*" component={NoMatch}/>
+          <Route path="*" component={NoMatch} />
         </Router>
       </Provider>
     )

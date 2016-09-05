@@ -10,7 +10,6 @@ class Dashboard extends Component {
 
   componentDidMount() {
     const {dispatch, userHash} = this.props
-
     dispatch(fetchMax(userHash))
   }
 
