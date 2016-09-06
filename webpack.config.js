@@ -15,17 +15,24 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['es2015-native-modules'],
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015-native-modules'],
+        },
       },
-    }, {
-      test: /\.scss$/,
-      loaders: ['style', 'css', 'sass'],
-    }],
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass'],
+      },
+      {
+        test: /\.less$/,
+        loader: "style!css!less"
+      }
+    ],
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

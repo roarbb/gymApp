@@ -3,11 +3,11 @@ import {Provider} from 'react-redux'
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 import configureStore from '../configureStore'
 
-import App from '../components/App'
+import App from './App'
 import NoMatch from '../components/NoMatch'
-import Dashboard from '../containers/Dashboard'
-import LoginContainer from '../containers/LoginContainer'
-import DetailContainer from '../containers/DetailContainer'
+import Dashboard from './Dashboard'
+import LoginContainer from './LoginContainer'
+import DetailContainer from './DetailContainer'
 
 const store = configureStore();
 

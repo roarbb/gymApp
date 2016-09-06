@@ -1,25 +1,24 @@
 import React, {PropTypes} from 'react'
+import {Row, Col, Card} from 'elemental'
 
-const PercentilList = ({max}) => {
+const PercentilList = ({max, trainingMax}) => {
 
   const rows = []
-  const trainingMax = max*0.9
+  const basis = '33%'
 
-  for (let i=1; i <= 25; i++) {
-    rows.push(<div className="col-xs-3"><span className="tag tag-primary">{i} %</span> {(trainingMax/100*i).toFixed(2)}</div>)
-    rows.push(<div className="col-xs-3"><span className="tag tag-primary">{i+25} %</span> {(trainingMax/100*(i+25)).toFixed(2)}</div>)
-    rows.push(<div className="col-xs-3"><span className="tag tag-primary">{i+50} %</span> {(trainingMax/100*(i+50)).toFixed(2)}</div>)
-    rows.push(<div className="col-xs-3"><span className="tag tag-primary">{i+75} %</span> {(trainingMax/100*(i+75)).toFixed(2)}</div>)
+  for (let i=1; i <= 100; i++) {
+    rows.push(
+        <Col basis={basis}>
+          <Card className="primary bg-primary">{i} %</Card><Card>{(trainingMax/100*(i)).toFixed(2)}</Card>
+        </Col>
+    )
   }
 
   return (
-    <div class="container">
-      <div>Personal best <span className="tag tag-success">{max}</span></div>
-      <div>Training max <span className="tag tag-danger">{trainingMax}</span></div>
-      <hr />
-      <div className="row">
+    <div id="percentil-list">
+      <Row className="text-xs-center">
         {rows}
-      </div>
+      </Row>
     </div>
   )
 }

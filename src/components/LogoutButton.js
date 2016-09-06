@@ -1,8 +1,9 @@
 import React, {PropTypes} from 'react'
+import {Button} from 'elemental'
 
 const LogoutButton = ({onLogoutClick}) => {
   return (
-    <a onClick={onLogoutClick}>[Logout]</a>
+    <Button type="hollow-danger" onClick={onLogoutClick}>Logout</Button>
   )
 };
 

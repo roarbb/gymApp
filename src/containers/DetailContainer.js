@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import PercentilList from '../components/PercentilList'
+import {Row, Col, Card, Button, Glyph} from 'elemental'
 
 class DetailContainer extends Component {
   constructor(props) {
@@ -16,10 +17,23 @@ class DetailContainer extends Component {
   }
 
   render() {
+    const max = this.activeItem.max
+    const trainingMax = max*0.9
+
     return (
-      <div>
-        <h4>{this.activeItem.discipline}</h4>
-        <PercentilList max={this.activeItem.max} />
+      <div id="detail-container">
+        <Row className="flex-horizontal-center">
+          <Col sm="3/8" className="max-title">{this.activeItem.discipline}</Col>
+          <Col sm="2/8">
+            <span className="text-success"><strong>Personal best</strong> {max}kg</span>
+          </Col>
+          <Col sm="2/8">
+            <span className="text-danger"><strong>Training max</strong> {trainingMax}kg</span>
+          </Col>
+          <Col sm="1/8"><Button type="hollow-primary"><Glyph icon='pencil' type='primary' /> Edit</Button></Col>
+        </Row>
+        <hr />
+        <PercentilList max={max} trainingMax={trainingMax} />
       </div>
     )
   }
