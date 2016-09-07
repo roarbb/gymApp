@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
 import {Card, Row, Col, Glyph, Button} from 'elemental'
+import AddMaxButton from './AddMaxButton'
 
 const MaxList = ({max}) => {
   return (
@@ -22,16 +23,14 @@ const MaxList = ({max}) => {
             </Link>
           )
         })}
-        <Button type="hollow-primary" className="pull-xs-right">
-          <Glyph icon='plus' type='primary' /> Add
-        </Button>
+        <AddMaxButton />
       </Card>
     </div>
   )
-};
+}
 
 MaxList.propTypes = {
   max: PropTypes.array.isRequired
-};
+}
 
-export default MaxList;
+export default MaxList

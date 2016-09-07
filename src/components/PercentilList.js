@@ -8,9 +8,10 @@ const PercentilList = ({max, trainingMax}) => {
 
   for (let i=1; i <= 100; i++) {
     rows.push(
-        <Col basis={basis}>
-          <Card className="primary bg-primary">{i} %</Card><Card>{(trainingMax/100*(i)).toFixed(2)}</Card>
-        </Col>
+      <Col basis={basis}>
+        <Card className="primary bg-primary">{i} %</Card>
+        <Card>{(trainingMax/100*(i)).toFixed(2)}</Card>
+      </Col>
     )
   }
 

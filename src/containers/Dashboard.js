@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {fetchMax} from '../actions'
 import MaxList from '../components/MaxList'
+import {Row, Col, Spinner, Card, Button, Glyph} from 'elemental'
+import AddMaxButton from '../components/AddMaxButton'
 
 class Dashboard extends Component {
   constructor(props) {
@@ -9,8 +11,11 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const {dispatch, userHash} = this.props
-    dispatch(fetchMax(userHash))
+    const {dispatch, userHash, max} = this.props
+
+    if(max.length === 0) {
+      dispatch(fetchMax(userHash))
+    }
   }
 
   render() {
@@ -19,11 +24,20 @@ class Dashboard extends Component {
     return (
       <div>
         {loading && max.length === 0 &&
-          <h2>Loading...</h2>
+          <Row>
+            <Col className="text-xs-center">
+              <Spinner size="lg" type="primary" />
+            </Col>
+          </Row>
         }
 
         {!loading && max.length === 0 &&
-          <h2>Empty.</h2>
+          <Card className="clearfix">
+            Your Dashboard is empty, but I know you can lift a lot! {`C'mon`} add your Push Press, Back Squat, Clean ...
+            <br />
+            <br />
+            <AddMaxButton />
+          </Card>
         }
 
         {max.length > 0 &&
