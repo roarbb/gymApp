@@ -15,14 +15,26 @@ const setApiUser = (response) => {
   }
 }
 
+const encrypt = (string) => {
+  const date = new Date
+  const msg = `${date.getDay()}${date.getDay()}${date.getHours()}${date.getFullYear()}`
+
+  const CryptoJS = require("crypto-js")
+  return CryptoJS.AES.encrypt(string, msg.toString())
+}
+
 export const saveLoggedUser = (response) => {
   return dispatch => {
     dispatch(setFacebookUser(response))
 
-    return fetch(`${config.apiUrl}user/${response.email}`)
+    return fetch(`${config.apiUrl}user/${encodeURIComponent(encrypt(response.email))}`)
       .then(response => response.json())
       .then(json => dispatch(setApiUser(json)))
-      .catch(response => console.log(response))
+      .catch(response => {
+        console.log(response)
+        dispatch(logoutUser())
+      }
+    )
   }
 }
 

@@ -9,7 +9,7 @@ const user = (state = getDefaultState(), action) => {
 
     case 'SAVE_API_USER':
       if(!action.response.hash) {
-        return setUser(state)
+        return setUser({})
       }
 
       const userWithHash = Object.assign({}, state, {
