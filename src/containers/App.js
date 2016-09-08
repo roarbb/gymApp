@@ -7,7 +7,7 @@ const App = (props) => {
     <div>
       <div id="header">
         <nav className="navbar navbar-full navbar-dark bg-primary clearfix">
-          <Link to="/" className="navbar-brand">Crossfit RJ max</Link>
+          <Link to="/" className="navbar-brand">Crossfit RJ Max</Link>
 
           {props.user.name &&
             <ul className="nav navbar-nav pull-xs-right">

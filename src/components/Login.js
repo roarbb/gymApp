@@ -29,11 +29,11 @@ const Login = ({onFacebookLoginResponse, user}) => {
       {content}
     </div>
   )
-};
+}
 
 Login.propTypes = {
   onFacebookLoginResponse: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-};
+}
 
 export default Login;
