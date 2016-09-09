@@ -33,7 +33,8 @@ class Dashboard extends Component {
 
         {!loading && max.length === 0 &&
           <Card className="clearfix">
-            Your Dashboard is empty, but I know you can lift a lot! {`C'mon`} add your Push Press, Back Squat, Clean ...
+            Your Dashboard is empty, but I know you can lift a lot!<br />
+            C'mon add your Push Press, Back Squat, Clean ...
             <br />
             <br />
             <AddMaxButton />
