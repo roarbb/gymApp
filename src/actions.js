@@ -31,7 +31,10 @@ export const saveLoggedUser = (response) => {
 
     return fetch(`${config.apiUrl}user/${encodeURIComponent(encrypt(response.email))}`)
       .then(response => response.json())
-      .then(json => dispatch(setApiUser(json)))
+      .then(json => {
+        dispatch(setApiUser(json))
+        browserHistory.push('/')
+      })
       .catch(response => {
         console.log(response)
         dispatch(logoutUser())
