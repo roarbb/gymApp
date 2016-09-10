@@ -8,7 +8,7 @@ import NoMatch from '../components/NoMatch'
 import Dashboard from './Dashboard'
 import LoginContainer from './LoginContainer'
 import DetailContainer from './DetailContainer'
-import AddForm from '../components/AddForm'
+import FormContainer from '../containers/FormContainer'
 
 const store = configureStore();
 
@@ -29,7 +29,7 @@ export default class Root extends Component {
             <IndexRoute component={Dashboard} onEnter={checkAuth} />
             <Route path="max/:maxId" component={DetailContainer} onEnter={checkAuth}/>
             <Route path="login" component={LoginContainer} />
-            <Route path="add" component={AddForm} />
+            <Route path="add" component={FormContainer} />
           </Route>
           <Route path="*" component={NoMatch} />
         </Router>
