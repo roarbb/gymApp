@@ -20,6 +20,12 @@ const max = (state = {loading: false, items: []}, action) => {
         ]
       })
 
+    case 'LOGOUT_USER':
+      return {
+        loading: false,
+        items: []
+      }
+
     default: return state;
   }
 };
