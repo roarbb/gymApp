@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import config from './config'
+import {browserHistory} from 'react-router'
+
 
 const setFacebookUser = (response) => {
   return {
@@ -65,5 +67,42 @@ export const setMax = (response) => {
 const startFetching = () => {
   return {
     type: 'START_MAX_FETCHING'
+  }
+}
+
+export const postMax = (userHash, name, weight) => {
+  return dispatch => {
+
+    const payload = {
+      userHash,
+      name,
+      weight
+    }
+
+    return fetch(`${config.apiUrl}max/${userHash}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(newMaxId => {
+      dispatch(setNewMax({
+        id: newMaxId,
+        discipline: name,
+        max: weight
+      }))
+      browserHistory.push('/')
+    })
+    .catch(err => console.log(err))
+  }
+}
+
+const setNewMax = (max) => {
+  return {
+    type: 'INSERT_NEW_MAX',
+    max
   }
 }

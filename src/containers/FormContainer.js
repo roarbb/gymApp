@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AddForm from '../components/AddForm'
 import {connect} from 'react-redux'
+import {postMax} from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -10,8 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownprops) => {
   return {
-    handleSubmit: (name, weight, user) => {
-      console.log('args: ', weight, user, name);
+    handleSubmit: (user, name, weight) => {
+      dispatch(postMax(user, name, weight))
     }
   }
 }

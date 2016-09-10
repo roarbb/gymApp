@@ -5,7 +5,7 @@ import { Field, Form } from 'react-redux-form';
 class AddForm extends Component {
   handleSubmit(formData) {
     const {name, weight} = formData
-    this.props.handleSubmit(name, weight, this.props.userHash)
+    this.props.handleSubmit(this.props.userHash, name, weight)
   }
 
   render() {

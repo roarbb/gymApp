@@ -11,6 +11,15 @@ const max = (state = {loading: false, items: []}, action) => {
         items: action.response
       })
 
+    case 'INSERT_NEW_MAX':
+      return Object.assign({}, state, {
+        loading: false,
+        items: [
+          ...state.items,
+          action.max
+        ]
+      })
+
     default: return state;
   }
 };
