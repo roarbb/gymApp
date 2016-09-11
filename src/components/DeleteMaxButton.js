@@ -25,7 +25,7 @@ class DeleteMaxButton extends Component {
           <Glyph icon="trashcan" /> Delete
         </Button>
 
-        <Modal isOpen={modal.isOpen} onCancel={toggleModal} backdropClosesModal>
+        <Modal isOpen={modal.isOpen} onCancel={toggleModal} backdropClosesModal className="top-modal-margin">
         	<ModalHeader text="Please confirm the action" showCloseButton onClose={toggleModal} />
         	<ModalBody>Do you really want to delete this? Action can not be reverted.</ModalBody>
         	<ModalFooter>
