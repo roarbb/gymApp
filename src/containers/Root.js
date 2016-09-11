@@ -30,6 +30,7 @@ export default class Root extends Component {
             <Route path="max/:maxId" component={DetailContainer} onEnter={checkAuth}/>
             <Route path="login" component={LoginContainer} />
             <Route path="add" component={FormContainer} />
+            <Route path="edit/:maxId" component={FormContainer} />
           </Route>
           <Route path="*" component={NoMatch} />
         </Router>

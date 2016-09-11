@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PercentilList from '../components/PercentilList'
 import {Row, Col, Card, Button, Glyph, Spinner, Alert} from 'elemental'
 import {fetchMax} from '../actions'
+import EditMaxButton from '../components/EditMaxButton'
 
 class DetailContainer extends Component {
   componentDidMount() {
@@ -36,9 +37,11 @@ class DetailContainer extends Component {
                 <span className="text-success"><strong>Personal best</strong> {activeItem.max}kg</span>
               </Col>
               <Col sm="5/20">
-                <span className="text-danger"><strong>Training max</strong> {trainingMax}kg</span>
+                <span className="text-danger"><strong>Training max</strong> {trainingMax.toFixed(2)}kg</span>
               </Col>
-              <Col sm="3/20" className="text-xs-right"><Button type="hollow-primary"><Glyph icon='pencil' type='primary' /> Edit</Button></Col>
+              <Col sm="3/20" className="text-xs-right">
+                <EditMaxButton maxId={activeItem.id} />
+              </Col>
             </Row>
             <hr />
             <PercentilList max={activeItem.max} trainingMax={trainingMax} />

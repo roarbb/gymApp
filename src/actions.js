@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import config from './config'
 import {browserHistory} from 'react-router'
-
+import {actions} from 'react-redux-form'
 
 const setFacebookUser = (response) => {
   return {
@@ -109,3 +109,67 @@ const setNewMax = (max) => {
     max
   }
 }
+
+const updateMaxItem = (max) => {
+  return {
+    type: 'UPDATE_MAX',
+    max
+  }
+}
+
+export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
+   return dispatch => {
+     if(max.length === 0) {
+       fetch(`${config.apiUrl}max/${userHash}`)
+         .then(response => response.json())
+         .then(json => {
+           const activeMax = json.find(item => {
+             return item.id == maxId
+           })
+
+           dispatch(actions.change('add', activeMax))
+         })
+         .catch(err => console.log(err))
+     }
+
+     if(maxId && max.length > 0) {
+       const activeMax = max.find(item => {
+         return item.id == maxId
+       })
+
+       dispatch(actions.change('add', activeMax))
+     } else {
+       dispatch(actions.change('add', {}))
+     }
+   }
+ }
+
+ export const updateMax = (maxId, userHash, name, weight) => {
+   return dispatch => {
+
+     const payload = {
+       maxId,
+       userHash,
+       name,
+       weight
+     }
+
+     return fetch(`${config.apiUrl}max/${userHash}/${maxId}`, {
+       method: 'PUT',
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+       },
+       body: JSON.stringify(payload)
+     })
+     .then(response => {
+       dispatch(updateMaxItem({
+         id: maxId,
+         discipline: name,
+         max: weight
+       }))
+       browserHistory.push(`/max/${maxId}`)
+     })
+     .catch(err => console.log(err))
+   }
+ }
