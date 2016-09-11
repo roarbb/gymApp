@@ -40,7 +40,7 @@ const max = (state = {loading: false, items: []}, action) => {
 
     case 'DELETE_MAX':
       const deletedItemIndex = state.items.findIndex(item => {
-        return item.id == action.max.id
+        return item.id == action.maxId
       })
 
       return Object.assign({}, state, {

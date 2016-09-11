@@ -118,58 +118,101 @@ const updateMaxItem = (max) => {
 }
 
 export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
-   return dispatch => {
-     if(max.length === 0) {
-       fetch(`${config.apiUrl}max/${userHash}`)
-         .then(response => response.json())
-         .then(json => {
-           const activeMax = json.find(item => {
-             return item.id == maxId
-           })
-
-           dispatch(actions.change('add', activeMax))
+ return dispatch => {
+   if(max.length === 0) {
+     fetch(`${config.apiUrl}max/${userHash}`)
+       .then(response => response.json())
+       .then(json => {
+         const activeMax = json.find(item => {
+           return item.id == maxId
          })
-         .catch(err => console.log(err))
-     }
 
-     if(maxId && max.length > 0) {
-       const activeMax = max.find(item => {
-         return item.id == maxId
+         dispatch(actions.change('add', activeMax))
        })
+       .catch(err => console.log(err))
+   }
 
-       dispatch(actions.change('add', activeMax))
-     } else {
-       dispatch(actions.change('add', {}))
-     }
+   if(maxId && max.length > 0) {
+     const activeMax = max.find(item => {
+       return item.id == maxId
+     })
+
+     dispatch(actions.change('add', activeMax))
+   } else {
+     dispatch(actions.change('add', {}))
    }
  }
+}
 
- export const updateMax = (maxId, userHash, name, weight) => {
-   return dispatch => {
+export const updateMax = (maxId, userHash, name, weight) => {
+ return dispatch => {
 
-     const payload = {
-       maxId,
-       userHash,
-       name,
-       weight
-     }
-
-     return fetch(`${config.apiUrl}max/${userHash}/${maxId}`, {
-       method: 'PUT',
-       headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
-       },
-       body: JSON.stringify(payload)
-     })
-     .then(response => {
-       dispatch(updateMaxItem({
-         id: maxId,
-         discipline: name,
-         max: weight
-       }))
-       browserHistory.push(`/max/${maxId}`)
-     })
-     .catch(err => console.log(err))
+   const payload = {
+     maxId,
+     userHash,
+     name,
+     weight
    }
+
+   return fetch(`${config.apiUrl}max/${userHash}/${maxId}`, {
+     method: 'PUT',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json'
+     },
+     body: JSON.stringify(payload)
+   })
+   .then(response => {
+     dispatch(updateMaxItem({
+       id: maxId,
+       discipline: name,
+       max: weight
+     }))
+     browserHistory.push(`/max/${maxId}`)
+   })
+   .catch(err => console.log(err))
  }
+}
+
+export const openModal = () => {
+  return {
+    type: 'OPEN_MODAL'
+  }
+}
+
+export const closeModal = () => {
+  return {
+    type: 'CLOSE_MODAL'
+  }
+}
+
+export const toggleModal = () => {
+  return {
+    type: 'TOGGLE_MODAL'
+  }
+}
+
+export const deleteMax = (maxId, userHash) => {
+  return dispatch => {
+    return fetch(`${config.apiUrl}max/${userHash}/${maxId}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({maxId, userHash})
+    })
+    .then(response => {
+      dispatch(deleteMaxItem(maxId))
+      browserHistory.push(`/`)
+    })
+    .catch(err => console.log(err))
+  }
+}
+
+export const deleteMaxItem = (maxId) => {
+  return {
+    type: 'DELETE_MAX',
+    maxId
+  }
+}

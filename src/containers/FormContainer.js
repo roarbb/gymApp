@@ -1,8 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import {connect} from 'react-redux'
-import {postMax, updateMax, setFormDataIfNeeded} from '../actions'
-import {Card, Row, Col, FormIconField, Button} from 'elemental'
+import {postMax, updateMax, setFormDataIfNeeded, toggleModal, deleteMax} from '../actions'
+import {Card, Row, Col, FormIconField, Button, Glyph} from 'elemental'
 import { Field, Form, actions } from 'react-redux-form';
+import DeleteMaxButton from '../components/DeleteMaxButton'
 
 class AddForm extends Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class AddForm extends Component {
     } else {
       dispatch(postMax(userHash, discipline, max))
     }
-
   }
 
   render() {
@@ -43,10 +43,13 @@ class AddForm extends Component {
                     <input type="text" name="weight" placeholder="weight" className="max-input form-control form-control-lg" />
                   </Field>
                 </FormIconField>
+                {this.props.params.maxId &&
+                  <DeleteMaxButton modal={this.props.modal} toggleModal={this.props.toggleModal} {...this.props} />
+                }
                 <Button
                   submit
                   type="hollow-success"
-                  className="pull-xs-right"> Save</Button>
+                  className="pull-xs-right"><Glyph icon='check' type='success' /> Save</Button>
               </Form>
             </Col>
           </Row>
@@ -66,7 +69,10 @@ const mapStateToProps = (state) => {
   return {
     userHash: state.user.hash,
     add: state.add,
-    max: state.max.items
+    max: state.max.items,
+    modal: {
+      isOpen: state.modal.isOpen
+    }
   }
 }
 
@@ -75,6 +81,7 @@ const mapDispatchToProps = (dispatch, ownprops) => {
     handleSubmit: (user, name, weight) => {
       dispatch(postMax(user, name, weight))
     },
+    toggleModal: () => dispatch(toggleModal()),
     dispatch
   }
 }
