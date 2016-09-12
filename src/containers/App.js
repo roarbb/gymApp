@@ -5,8 +5,8 @@ import {connect} from 'react-redux'
 const App = (props) => {
   return (
     <div>
-      <div id="header">
-        <nav className="navbar navbar-full navbar-dark bg-primary clearfix">
+      <div id="header" className="bg-primary">
+        <nav className="navbar navbar-full navbar-dark container clearfix">
           <Link to="/" className="navbar-brand">Crossfit RJ Max</Link>
 
           {props.user.name &&
@@ -21,7 +21,7 @@ const App = (props) => {
         </nav>
       </div>
 
-      <div className="container">
+      <div className="container m-t-2">
         {props.children}
       </div>
     </div>
