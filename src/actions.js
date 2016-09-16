@@ -126,8 +126,11 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
          const activeMax = json.find(item => {
            return item.id == maxId
          })
-
-         dispatch(actions.change('add', activeMax))
+         if(!activeMax) {
+           dispatch(actions.change('add', { discipline: '', weight: '' }))
+         } else {
+           dispatch(actions.change('add', activeMax))
+         }
        })
        .catch(err => console.log(err))
    }
@@ -139,7 +142,7 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
 
      dispatch(actions.change('add', activeMax))
    } else {
-     dispatch(actions.change('add', {}))
+     dispatch(actions.change('add', { discipline: '', weight: '' }))
    }
  }
 }
@@ -204,6 +207,7 @@ export const deleteMax = (maxId, userHash) => {
     })
     .then(response => {
       dispatch(deleteMaxItem(maxId))
+      dispatch(toggleModal())
       browserHistory.push(`/`)
     })
     .catch(err => console.log(err))
