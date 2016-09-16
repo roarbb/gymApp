@@ -7,7 +7,7 @@ import modal from './modal'
 const rootReducer = combineReducers({
   user,
   max,
-  add: modelReducer('add', { name: '', weight: '' }),
+  add: modelReducer('add', { discipline: '', weight: '' }),
   addForm: formReducer('add'),
   modal
 });
