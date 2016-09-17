@@ -127,9 +127,12 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
            return parseInt(item.id, 10) === parseInt(maxId, 10)
          })
          if(!activeMax) {
-           dispatch(actions.change('add', { discipline: '', weight: '' }))
+           dispatch(actions.change('add', { discipline: '', max: '' }))
          } else {
-           dispatch(actions.change('add', activeMax))
+          dispatch(actions.change('add', {
+            discipline: activeMax.discipline,
+            max: activeMax.max.toString()
+          }))
          }
        })
        .catch(err => console.log(err))
@@ -140,9 +143,12 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
        return parseInt(item.id, 10) === parseInt(maxId, 10)
      })
 
-     dispatch(actions.change('add', activeMax))
+     dispatch(actions.change('add', {
+       discipline: activeMax.discipline,
+       max: activeMax.max.toString()
+     }))
    } else {
-     dispatch(actions.change('add', { discipline: '', weight: '' }))
+     dispatch(actions.change('add', { discipline: '', max: '' }))
    }
  }
 }
