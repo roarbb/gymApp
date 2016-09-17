@@ -2,13 +2,14 @@ import React, {PropTypes} from 'react'
 import FacebookLogin from 'react-facebook-login'
 import Logout from '../containers/Logout'
 import {Card, Glyph} from 'elemental'
+import config from '../config'
 
 const Login = ({onFacebookLoginResponse, user}) => {
   let content = <Card className="logged-card m-x-auto">
     <div>Please login with your Facebook account.</div>
     <hr />
     <FacebookLogin
-      appId="223180534746400"
+      appId={config.facebookAppId}
       autoLoad={false}
       fields="name,email,picture"
       cssClass="Button Button--hollow-primary"
