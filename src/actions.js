@@ -124,7 +124,7 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
        .then(response => response.json())
        .then(json => {
          const activeMax = json.find(item => {
-           return item.id === parseInt(maxId, 10)
+           return parseInt(item.id, 10) === parseInt(maxId, 10)
          })
          if(!activeMax) {
            dispatch(actions.change('add', { discipline: '', weight: '' }))
@@ -137,7 +137,7 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
 
    if(maxId && max.length > 0) {
      const activeMax = max.find(item => {
-       return item.id === parseInt(maxId, 10)
+       return parseInt(item.id, 10) === parseInt(maxId, 10)
      })
 
      dispatch(actions.change('add', activeMax))
