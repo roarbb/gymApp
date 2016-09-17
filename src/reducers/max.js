@@ -30,7 +30,7 @@ const max = (state = {loading: false, items: []}, action) => {
       return Object.assign({}, state, {
         loading: false,
         items: state.items.map(item => {
-          if(item.id != action.max.id) {
+          if(item.id !== parseInt(action.max.id, 10)) {
             return item
           }
 
@@ -40,7 +40,7 @@ const max = (state = {loading: false, items: []}, action) => {
 
     case 'DELETE_MAX':
       const deletedItemIndex = state.items.findIndex(item => {
-        return item.id == action.maxId
+        return item.id === parseInt(action.maxId, 10)
       })
 
       return Object.assign({}, state, {

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
-import {Card, Row, Col, Glyph, Button} from 'elemental'
+import {Card, Row, Col, Glyph} from 'elemental'
 import AddMaxButton from './AddMaxButton'
 
 const MaxList = ({max}) => {

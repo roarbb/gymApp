@@ -18,11 +18,17 @@ const setApiUser = (response) => {
 }
 
 const encrypt = (string) => {
-  const date = new Date
+  const date = new Date()
   const msg = `${date.getDay()}${date.getDay()}${date.getHours()}${date.getFullYear()}`
 
   const CryptoJS = require("crypto-js")
   return CryptoJS.AES.encrypt(string, msg.toString())
+}
+
+export const logoutUser = () => {
+  return {
+    type: 'LOGOUT_USER'
+  }
 }
 
 export const saveLoggedUser = (response) => {
@@ -43,9 +49,16 @@ export const saveLoggedUser = (response) => {
   }
 }
 
-export const logoutUser = () => {
+const startFetching = () => {
   return {
-    type: 'LOGOUT_USER'
+    type: 'START_MAX_FETCHING'
+  }
+}
+
+export const setMax = (response) => {
+  return {
+    type: 'SAVE_MAX',
+    response: response
   }
 }
 
@@ -60,16 +73,10 @@ export const fetchMax = (userHash) => {
   }
 }
 
-export const setMax = (response) => {
+const setNewMax = (max) => {
   return {
-    type: 'SAVE_MAX',
-    response: response
-  }
-}
-
-const startFetching = () => {
-  return {
-    type: 'START_MAX_FETCHING'
+    type: 'INSERT_NEW_MAX',
+    max
   }
 }
 
@@ -103,13 +110,6 @@ export const postMax = (userHash, name, weight) => {
   }
 }
 
-const setNewMax = (max) => {
-  return {
-    type: 'INSERT_NEW_MAX',
-    max
-  }
-}
-
 const updateMaxItem = (max) => {
   return {
     type: 'UPDATE_MAX',
@@ -124,7 +124,7 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
        .then(response => response.json())
        .then(json => {
          const activeMax = json.find(item => {
-           return item.id == maxId
+           return item.id === parseInt(maxId, 10)
          })
          if(!activeMax) {
            dispatch(actions.change('add', { discipline: '', weight: '' }))
@@ -137,7 +137,7 @@ export const setFormDataIfNeeded = (max, userHash, maxId = 0) => {
 
    if(maxId && max.length > 0) {
      const activeMax = max.find(item => {
-       return item.id == maxId
+       return item.id === parseInt(maxId, 10)
      })
 
      dispatch(actions.change('add', activeMax))
@@ -195,6 +195,13 @@ export const toggleModal = () => {
   }
 }
 
+export const deleteMaxItem = (maxId) => {
+  return {
+    type: 'DELETE_MAX',
+    maxId
+  }
+}
+
 export const deleteMax = (maxId, userHash) => {
   return dispatch => {
     return fetch(`${config.apiUrl}max/${userHash}/${maxId}`, {
@@ -211,12 +218,5 @@ export const deleteMax = (maxId, userHash) => {
       browserHistory.push(`/`)
     })
     .catch(err => console.log(err))
-  }
-}
-
-export const deleteMaxItem = (maxId) => {
-  return {
-    type: 'DELETE_MAX',
-    maxId
   }
 }

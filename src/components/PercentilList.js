@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import {Row, Col, Card} from 'elemental'
 
 const PercentilList = ({max, trainingMax}) => {
@@ -8,7 +8,7 @@ const PercentilList = ({max, trainingMax}) => {
 
   for (let i=1; i <= 100; i++) {
     rows.push(
-      <Col basis={basis} style={{"white-space": "nowrap"}}>
+      <Col basis={basis} style={{"whiteSpace": "nowrap"}} key={i}>
         <Card className="primary bg-primary">{i} %</Card>
         <Card>{(trainingMax/100*(i)).toFixed(2)}</Card>
       </Col>

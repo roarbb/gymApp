@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Provider} from 'react-redux'
-import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import configureStore from '../configureStore'
 
 import App from './App'

@@ -1,3 +1,12 @@
+const setUser = (data) => {
+  localStorage.setItem('user', JSON.stringify(data))
+  return data
+}
+
+const getDefaultState = () => {
+  return JSON.parse(localStorage.getItem('user')) || {}
+}
+
 const user = (state = getDefaultState(), action) => {
   switch (action.type) {
     case 'SAVE_FACEBOOK_USER':
@@ -26,12 +35,3 @@ const user = (state = getDefaultState(), action) => {
 }
 
 export default user
-
-const setUser = (data) => {
-  localStorage.setItem('user', JSON.stringify(data))
-  return data
-}
-
-const getDefaultState = () => {
-  return JSON.parse(localStorage.getItem('user')) || {}
-}

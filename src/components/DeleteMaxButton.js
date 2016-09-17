@@ -1,13 +1,8 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
 import {Button, Glyph, Modal, ModalHeader, ModalBody, ModalFooter} from 'elemental'
 import {deleteMax} from '../actions'
 
 class DeleteMaxButton extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   handleDelete(props) {
     const {dispatch, params, userHash} = props
 
@@ -17,7 +12,7 @@ class DeleteMaxButton extends Component {
   }
 
   render() {
-    const {modal, toggleModal, handleDelete} = this.props
+    const {modal, toggleModal} = this.props
 
     return(
       <div className="pull-xs-left">

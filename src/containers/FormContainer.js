@@ -1,15 +1,11 @@
 import React, { PropTypes, Component } from 'react'
 import {connect} from 'react-redux'
-import {postMax, updateMax, setFormDataIfNeeded, toggleModal, deleteMax} from '../actions'
+import {postMax, updateMax, setFormDataIfNeeded, toggleModal} from '../actions'
 import {Card, Row, Col, FormIconField, Button, Glyph} from 'elemental'
-import { Field, Form, actions } from 'react-redux-form';
+import { Field, Form } from 'react-redux-form';
 import DeleteMaxButton from '../components/DeleteMaxButton'
 
 class AddForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     const {dispatch, params, max, userHash} = this.props
     dispatch(setFormDataIfNeeded(max, userHash, params.maxId))

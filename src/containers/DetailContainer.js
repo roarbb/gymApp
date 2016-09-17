@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import PercentilList from '../components/PercentilList'
-import {Row, Col, Card, Button, Glyph, Spinner, Alert} from 'elemental'
+import {Row, Col, Glyph, Spinner, Alert} from 'elemental'
 import {fetchMax} from '../actions'
 import EditMaxButton from '../components/EditMaxButton'
 
@@ -19,7 +19,7 @@ class DetailContainer extends Component {
     let trainingMax = 0
 
     const activeItem = max.find(item => {
-      return item.id == this.props.params.maxId
+      return parseInt(item.id, 10) === parseInt(this.props.params.maxId, 10)
     })
 
     if(activeItem) {

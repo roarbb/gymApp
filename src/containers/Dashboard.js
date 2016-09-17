@@ -2,14 +2,10 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {fetchMax} from '../actions'
 import MaxList from '../components/MaxList'
-import {Row, Col, Spinner, Card, Button, Glyph} from 'elemental'
+import {Row, Col, Spinner, Card} from 'elemental'
 import AddMaxButton from '../components/AddMaxButton'
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     const {dispatch, userHash, max} = this.props
 
