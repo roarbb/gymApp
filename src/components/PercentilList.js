@@ -4,11 +4,10 @@ import {Row, Col, Card} from 'elemental'
 const PercentilList = ({max, trainingMax}) => {
 
   const rows = []
-  const basis = '25%'
 
   for (let i=1; i <= 100; i++) {
     rows.push(
-      <Col basis={basis} style={{"whiteSpace": "nowrap"}} key={i}>
+      <Col xs="50%" md="25%" lg="1/6" style={{"whiteSpace": "nowrap"}} key={i}>
         <Card className="primary bg-primary">{i} % | {(trainingMax/100*(i)).toFixed(2)}</Card>
       </Col>
     )
