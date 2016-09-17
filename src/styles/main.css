@@ -27,19 +27,9 @@ body {
 #login-screen .img-rounded {
   margin-bottom: 15px; }
 
-#percentil-list .Card {
-  display: inline-block;
-  margin-bottom: .2em;
-  padding: .6em; }
-  #percentil-list .Card.primary {
-    color: white;
-    font-weight: bold; }
-
 #detail-container .max-title {
   font-size: 1.7em;
   font-style: italic; }
 
 #add-form .max-input {
   padding-left: 43px; }
-
-/*# sourceMappingURL=main.css.map */
