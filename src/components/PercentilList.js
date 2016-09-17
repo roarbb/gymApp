@@ -4,7 +4,7 @@ import {Row, Col, Card} from 'elemental'
 const PercentilList = ({max, trainingMax}) => {
 
   const rows = []
-  const basis = '33%'
+  const basis = '30%'
 
   for (let i=1; i <= 100; i++) {
     rows.push(
