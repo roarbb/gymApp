@@ -23,22 +23,56 @@ class AddForm extends Component {
   }
 
   render() {
+    const { addForm: { fields } } = this.props;
+
     return (
       <div id="add-form">
         <Card>
           <Row className="clearfix">
             <Col md="60%" sm="100%" className="m-x-auto">
               <Form model="add" onSubmit={(val) => this.handleSubmit(val)} autoComplete="off">
-                <FormIconField iconPosition="left" iconKey="bookmark" iconFill="primary">
-                  <Field model="add.discipline">
-                    <input type="text" name="discipline" placeholder="discipline" className="max-input form-control form-control-lg" />
+
+                  <Field
+                    model="add.discipline"
+                    validators={{
+                      required: (val) => val && val.length && 'Email is too short'
+                    }}
+                    validateOn="change">
+
+                    { fields.discipline
+                      && !fields.discipline.valid
+                      && fields.discipline.submitFailed &&
+                      <div className="alert alert-danger fade in" role="alert">
+                        <Glyph icon="arrow-down" /> Please enter the name here.
+                      </div>
+                    }
+
+                    <FormIconField iconPosition="left" iconKey="bookmark" iconFill="primary">
+                    <input type="text" name="discipline" placeholder="Name" className="max-input form-control form-control-lg" />
+                    </FormIconField>
                   </Field>
-                </FormIconField>
-                <FormIconField iconPosition="left" iconKey="database" iconFill="danger">
-                  <Field model="add.max">
-                    <input type="text" name="weight" placeholder="weight" className="max-input form-control form-control-lg" />
+
+                  <Field
+                    model="add.max"
+                    validators={{
+                      required: (val) => val && val.length,
+                      isNumber: (val) => val && !isNaN(val)
+                    }}
+                    validateOn="change">
+
+                    { fields.max
+                      && (!fields.max.untouched && !fields.max.valid) &&
+                      <div className="alert alert-danger fade in" role="alert">
+                        <Glyph icon="arrow-down" /> Please enter valid number here.
+                      </div>
+                    }
+
+                    <FormIconField iconPosition="left" iconKey="database" iconFill="danger">
+                      <input type="text" name="weight" placeholder="Weight" className="max-input form-control form-control-lg" />
+                    </FormIconField>
+
                   </Field>
-                </FormIconField>
+
                 {this.props.params.maxId &&
                   <DeleteMaxButton modal={this.props.modal} toggleModal={this.props.toggleModal} {...this.props} />
                 }
@@ -68,7 +102,8 @@ const mapStateToProps = (state) => {
     max: state.max.items,
     modal: {
       isOpen: state.modal.isOpen
-    }
+    },
+    addForm: state.addForm
   }
 }
 
