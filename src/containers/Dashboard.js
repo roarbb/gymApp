@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {fetchMax} from '../actions'
 import MaxList from '../components/MaxList'
-import {Row, Col, Spinner, Card} from 'elemental'
+import {Row, Col, Spinner, Card, Glyph} from 'elemental'
 import AddMaxButton from '../components/AddMaxButton'
 
 class Dashboard extends Component {
@@ -28,9 +28,8 @@ class Dashboard extends Component {
         }
 
         {!loading && max.length === 0 &&
-          <Card className="clearfix">
-            Your Dashboard is empty, but I know you can lift a lot!<br />
-            C'mon add your Push Press, Back Squat, Clean ...
+          <Card className="clearfix text-xs-center">
+            <Glyph icon="tag" type="muted" /> Your Dashboard is empty ...
             <br />
             <br />
             <AddMaxButton />
