@@ -9,7 +9,7 @@ class Dashboard extends Component {
   componentDidMount() {
     const {dispatch, userHash, max} = this.props
 
-    if(max.length === 0) {
+    if(max.length < 2) {
       dispatch(fetchMax(userHash))
     }
   }

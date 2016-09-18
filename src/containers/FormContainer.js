@@ -2,18 +2,22 @@ import React, { PropTypes, Component } from 'react'
 import {connect} from 'react-redux'
 import {postMax, updateMax, setFormDataIfNeeded, toggleModal} from '../actions'
 import {Card, Row, Col, FormIconField, Button, Glyph} from 'elemental'
-import { Field, Form } from 'react-redux-form';
+import { Field, Form, Errors } from 'react-redux-form';
 import DeleteMaxButton from '../components/DeleteMaxButton'
 
 class AddForm extends Component {
   componentDidMount() {
     const {dispatch, params, max, userHash} = this.props
     dispatch(setFormDataIfNeeded(max, userHash, params.maxId))
+
+    this.formSubmited = false
   }
 
   handleSubmit(formData) {
     const {discipline, max} = formData
     const {dispatch, params, userHash} = this.props
+
+    this.formSubmited = true
 
     if(params.maxId) {
       dispatch(updateMax(params.maxId, userHash, discipline, max))
@@ -25,6 +29,8 @@ class AddForm extends Component {
   render() {
     const { addForm: { fields } } = this.props;
 
+    console.log('fields.max', fields.max);
+
     return (
       <div id="add-form">
         <Card>
@@ -35,17 +41,17 @@ class AddForm extends Component {
                   <Field
                     model="add.discipline"
                     validators={{
-                      required: (val) => val && val.length && 'Email is too short'
-                    }}
-                    validateOn="change">
+                      required: (val) => val && val.length
+                    }}>
 
-                    { fields.discipline
-                      && !fields.discipline.valid
-                      && fields.discipline.submitFailed &&
-                      <div className="alert alert-danger fade in" role="alert">
-                        <Glyph icon="arrow-down" /> Please enter the name here.
-                      </div>
-                    }
+                    <Errors
+                      wrapper={(props) => <div className="alert alert-danger fade in" role="alert"><Glyph icon="arrow-down" /> {props.children}</div>}
+                      show={{ touched: true, focus: false }}
+                      model="add.discipline"
+                      messages={{
+                        required: 'Name can not be empty. '
+                      }}
+                    />
 
                     <FormIconField iconPosition="left" iconKey="bookmark" iconFill="primary">
                     <input type="text" name="discipline" placeholder="Name" className="max-input form-control form-control-lg" />
@@ -57,15 +63,17 @@ class AddForm extends Component {
                     validators={{
                       required: (val) => val && val.length,
                       isNumber: (val) => val && !isNaN(val)
-                    }}
-                    validateOn="change">
+                    }}>
 
-                    { fields.max
-                      && (!fields.max.untouched && !fields.max.valid) &&
-                      <div className="alert alert-danger fade in" role="alert">
-                        <Glyph icon="arrow-down" /> Please enter valid number here.
-                      </div>
-                    }
+                    <Errors
+                      wrapper={(props) => <div className="alert alert-danger fade in" role="alert"><Glyph icon="arrow-down" /> {props.children}</div>}
+                      show={{ touched: true, focus: false }}
+                      model="add.max"
+                      messages={{
+                        required: 'Weight can not be empty. ',
+                        isNumber: 'Please enter a valid number'
+                      }}
+                    />
 
                     <FormIconField iconPosition="left" iconKey="database" iconFill="danger">
                       <input type="text" name="weight" placeholder="Weight" className="max-input form-control form-control-lg" />

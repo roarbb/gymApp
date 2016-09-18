@@ -37,6 +37,7 @@ export const saveLoggedUser = (response) => {
       .then(response => response.json())
       .then(json => {
         dispatch(setFacebookUser(response))
+
         dispatch(setApiUser(json))
         browserHistory.push('/')
       })
@@ -103,6 +104,7 @@ export const postMax = (userHash, name, weight) => {
         discipline: name,
         max: weight
       }))
+      dispatch(actions.reset('add'))
       browserHistory.push('/')
     })
     .catch(err => console.log(err))
