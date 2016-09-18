@@ -29,8 +29,6 @@ class AddForm extends Component {
   render() {
     const { addForm: { fields } } = this.props;
 
-    console.log('fields.max', fields.max);
-
     return (
       <div id="add-form">
         <Card>
