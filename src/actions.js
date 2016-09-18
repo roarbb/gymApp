@@ -33,11 +33,10 @@ export const logoutUser = () => {
 
 export const saveLoggedUser = (response) => {
   return dispatch => {
-    dispatch(setFacebookUser(response))
-
     return fetch(`${config.apiUrl}user/${encodeURIComponent(encrypt(response.email))}`)
       .then(response => response.json())
       .then(json => {
+        dispatch(setFacebookUser(response))
         dispatch(setApiUser(json))
         browserHistory.push('/')
       })
