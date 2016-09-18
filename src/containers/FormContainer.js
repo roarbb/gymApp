@@ -27,8 +27,6 @@ class AddForm extends Component {
   }
 
   render() {
-    const { addForm: { fields } } = this.props;
-
     return (
       <div id="add-form">
         <Card>
