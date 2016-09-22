@@ -4,7 +4,7 @@ const setUser = (data) => {
 }
 
 const getDefaultState = () => {
-  return JSON.parse(localStorage.getItem('user')) || {}
+  return JSON.parse(localStorage.getItem('user') || '{}') 
 }
 
 const user = (state = getDefaultState(), action) => {
