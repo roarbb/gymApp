@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row, Col, Card} from 'elemental'
 
-const PercentilList = ({max, trainingMax}) => {
+const PercentilList = ({trainingMax}) => {
 
   const rows = []
 

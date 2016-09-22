@@ -2,7 +2,9 @@ import {connect} from 'react-redux'
 import {logoutUser} from '../actions'
 import LogoutButton from '../components/LogoutButton'
 
-const mapStateToProps = (state) => {}
+const mapStateToProps = (state) => {
+  return {}
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {

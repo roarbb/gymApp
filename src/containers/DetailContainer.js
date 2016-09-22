@@ -44,7 +44,7 @@ class DetailContainer extends Component {
               </Col>
             </Row>
             <hr />
-            <PercentilList max={activeItem.max} trainingMax={trainingMax} />
+            <PercentilList trainingMax={trainingMax} />
           </div>
         }
 
